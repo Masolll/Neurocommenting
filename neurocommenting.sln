@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "neurocommenting", "neurocommenting.csproj", "{34471FBE-74F2-E72C-A6E1-F03D3A2E53CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34471FBE-74F2-E72C-A6E1-F03D3A2E53CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34471FBE-74F2-E72C-A6E1-F03D3A2E53CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34471FBE-74F2-E72C-A6E1-F03D3A2E53CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34471FBE-74F2-E72C-A6E1-F03D3A2E53CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAC8EE4C-05CB-4F33-A819-2EB0A9F1811A}
+	EndGlobalSection
+EndGlobal

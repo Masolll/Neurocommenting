@@ -1,0 +1,40 @@
+{
+  "PromptTone": "Позитивный",
+
+  "MinWordsInPost": 1,
+
+  "AccountCommentsLimit": 10,
+  "AccountChannelsJoinLimit": 10,
+
+  "DelayAfterCommentsLimit": 10,
+  "DelayBeforeJoin": 10,
+  "DelayBeforeCommenting": 10,
+
+  "SkipPostsBeforeCommenting": 0,
+
+  "IONetApiKey": "some_api_key",
+  "ProxyForIONet": {
+    "Ip": "some_ip",
+    "Port": 0,
+    "Login": "some_login",
+    "Password": "some_password"
+  },
+  "AiModels": [
+    {
+      "Priority": 1,
+      "Id": "deepseek-ai/DeepSeek-R1-0528"
+    },
+    {
+      "Priority": 2,
+      "Id": "Qwen/Qwen3-235B-A22B-FP8"
+    },
+    {
+      "Priority": 3,
+      "Id": "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8"
+    },
+    {
+      "Priority": 4,
+      "Id": "Qwen/Qwen2.5-VL-32B-Instruct"
+    }
+  ]
+}
