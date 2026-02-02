@@ -4,10 +4,11 @@ using Neurocommenting.Telegram;
 
 namespace Neurocommenting;
 
-public class Program
+class Program
 {
     static async Task Main()
     {
+        AppPaths.EnsureDataExists();
         WTelegram.Helpers.Log = Logger.Write;
         var commentingIsStarted = false;
 

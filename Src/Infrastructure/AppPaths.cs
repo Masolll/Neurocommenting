@@ -4,7 +4,7 @@ namespace Neurocommenting.Infrastructure;
 
 public static class AppPaths
 {
-    public static string Root => Path.GetFullPath("../../../", AppContext.BaseDirectory);
+    public static string Root => AppContext.BaseDirectory;
     
     // Folders
     public static string DataFolder => Path.Combine(Root, "Data");
@@ -26,4 +26,12 @@ public static class AppPaths
     public static string AppSettingsFile => Path.Combine(ConfigFolder, "Settings.json");
     public static string GroupProxyFile(string groupName) => Path.Combine(GroupFolder(groupName), "Proxy.txt");
     public static string GroupProxyFile (Proxy proxy) => Path.Combine(GroupFolder(proxy), "Proxy.txt");
+
+    public static void EnsureDataExists()
+    {
+        Directory.CreateDirectory(DataFolder);
+        Directory.CreateDirectory(LogsFolder);
+        Directory.CreateDirectory(ConfigFolder);
+        Directory.CreateDirectory(AccountsFolder);
+    }
 }

@@ -82,10 +82,8 @@ public class AiModelsManager
             }
             return commentText;
         }
-        else
-        {
-            throw new Exception($"API IO.NET вернул неизвестный ответ: {responseString}");
-        }
+        
+        throw new Exception($"API IO.NET вернул неизвестный ответ: {responseString}");
     }
 
     private void BlockAndUpdateModel(string blockModelId)

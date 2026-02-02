@@ -98,6 +98,7 @@ public class TelegramClient
             {
                 var inputPeerChannel = new InputChannel(commentChannel.id, commentChannel.access_hash);
                 var channelFullInfo = await Client.Channels_GetFullChannel(inputPeerChannel);
+                
                 if (channelFullInfo.full_chat is ChannelFull channelFull
                 && channelFullInfo.chats.TryGetValue(channelFull.linked_chat_id, out var linkedChannel)
                 && linkedChannel is Channel mainChannel
@@ -147,7 +148,7 @@ public class TelegramClient
         }
     }
 
-    public async Task JoinDiscussionChatAsync(string linkChannel)
+    private async Task JoinDiscussionChatAsync(string linkChannel)
     {
         var channelUsername = ChannelsRepository.ConvertLinkToUsername(linkChannel);
         var channelInfo = await Client.Contacts_ResolveUsername(channelUsername);

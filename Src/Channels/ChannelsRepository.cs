@@ -12,7 +12,7 @@ public static class ChannelsRepository
     {
         if (streamReader != null)
         {
-            throw new Exception("Попытка открыть уже открытый файл Channels.txt с помощью метода ChannelsManager.OpenFile");
+            throw new Exception("Попытка повторно открыть файл с каналами.");
         }
         fileStream = new FileStream(AppPaths.ChannelsFile, FileMode.Open);
         streamReader = new StreamReader(fileStream);
@@ -24,7 +24,7 @@ public static class ChannelsRepository
         {
             if (streamReader is null)
             {
-                throw new Exception("Невозможно вызвать метод ChannelsManager.GetChannel без открытия файла методом ChannelsManager.OpenFile");
+                throw new Exception("Перед использованием GetNextChannel откройте файл с помощью метода OpenFile.");
             }
             return streamReader.ReadLine();
         }
@@ -34,7 +34,7 @@ public static class ChannelsRepository
     {
         if (streamReader is null)
         {
-            throw new Exception("Невозможно вызывать метод ChannelsManager.DisposeResources без открытия файла методом ChannelsManager.OpenFile");
+            throw new Exception("Невозможно вызывать метод DisposeResources без открытия файла методом OpenFile");
         }
         streamReader?.Dispose();
         fileStream = null;
