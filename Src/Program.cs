@@ -32,8 +32,7 @@ class Program
                 + "3 - Добавить новый аккаунт" + Environment.NewLine
                 + "4 - Создать новую группу" + Environment.NewLine
                 + "i - Посмотреть информацию о запущенных аккаунтах");
-            var mode = Console.ReadKey().KeyChar;
-            await invoker.Run(mode);
+            await invoker.Run(Console.ReadKey().KeyChar);
         }
     }
 }
