@@ -1,5 +1,3 @@
-using Neurocommenting;
-
 namespace Neurocommenting.Infrastructure;
 
 public static class Logger

@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Neurocommenting.Infrastructure;
 
-namespace Neurocommenting;
+namespace Neurocommenting.Settings;
 
 public class AppSettings
 {

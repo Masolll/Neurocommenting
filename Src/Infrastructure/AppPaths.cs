@@ -1,5 +1,3 @@
-using Neurocommenting;
-
 namespace Neurocommenting.Infrastructure;
 
 public static class AppPaths
@@ -24,8 +22,8 @@ public static class AppPaths
     public static string ChannelsFile => Path.Combine(ConfigFolder, "Channels.txt" );
     public static string PromptFile => Path.Combine(ConfigFolder, "Prompt.txt");
     public static string AppSettingsFile => Path.Combine(ConfigFolder, "Settings.json");
-    public static string GroupProxyFile(string groupName) => Path.Combine(GroupFolder(groupName), "Proxy.txt");
-    public static string GroupProxyFile (Proxy proxy) => Path.Combine(GroupFolder(proxy), "Proxy.txt");
+    public static string GroupConfigFile(string groupName) => Path.Combine(GroupFolder(groupName), "Group.json");
+    public static string GroupConfigFile (Proxy proxy) => Path.Combine(GroupFolder(proxy), "Group.json");
     
     static AppPaths()
     {

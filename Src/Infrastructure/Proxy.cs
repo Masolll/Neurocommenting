@@ -9,20 +9,11 @@ public class Proxy
     public int Port { get; set; }
     public string Login { get; set; }
     public string Password { get; set; }
-    
-    public Proxy(string ip, int port, string login, string password)
-    {
-        Ip = ip;
-        Port = port;
-        Login = login;
-        Password = password;
-    }
 
-    public static bool IsValid(string proxyLine)
+    public static bool IsValid(Proxy proxyData)
     {
         try
         {
-            var proxyData = Parse(proxyLine);
             var proxyClient = new Socks5ProxyClient(proxyData.Ip, proxyData.Port, proxyData.Login, proxyData.Password);
             var telegramServerIp = "149.154.167.50";
             var telegramServerPort = 443;
@@ -44,12 +35,19 @@ public class Proxy
             var port = Int32.Parse(proxyParts[1]);
             var login = proxyParts[2];
             var password = proxyParts[3];
-            return new Proxy(ip, port, login, password);
+            return new Proxy()
+            {
+                Enabled = true,
+                Ip = ip,
+                Port = port,
+                Login = login,
+                Password = password
+            };
         }
         catch
         {
             throw new ArgumentException(
-                $"Ошибка при парсинге прокси {proxy}. Прокси должен быть в формате login:password@ip:port"
+                $"Ошибка при парсинге прокси {proxy}. Прокси должен быть в формате ip:port:login:password"
             );
         }
     }

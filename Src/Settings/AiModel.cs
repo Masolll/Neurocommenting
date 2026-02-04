@@ -1,4 +1,4 @@
-namespace Neurocommenting;
+namespace Neurocommenting.Settings;
 
 public class AiModel
 {

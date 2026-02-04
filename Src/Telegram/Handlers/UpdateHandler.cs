@@ -1,5 +1,5 @@
 using Neurocommenting.Infrastructure;
-using Neurocommenting.Telegram;
+using Neurocommenting.Settings;
 using TL;
 
 namespace Neurocommenting.Telegram.Handlers;

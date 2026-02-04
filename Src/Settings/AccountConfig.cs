@@ -1,15 +1,12 @@
-using TL;
-
-namespace Neurocommenting;
+namespace Neurocommenting.Settings;
 
 public class AccountConfig
 {
-    public string ApiId { get; init; }
-    public string ApiHash { get; init; }
-    public string Phone { get; init; }
-    public string UserId { get; init; }
-    public string SessionPath { get; init; }
-    public string Proxy { get; init; }
+    public string ApiId { get; set; }
+    public string ApiHash { get; set; }
+    public string Phone { get; set; }
+    public string UserId { get; set; }
+    public string SessionPath { get; set; }
 
     public string GetConfig(string key)
     {

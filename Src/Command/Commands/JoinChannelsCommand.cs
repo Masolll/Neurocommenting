@@ -15,6 +15,7 @@ public class JoinChannelsCommand : ICommand
     public async Task ExecuteAsync()
     {
         await receiver.InitializeAccountsIfNeededAsync();
+        await receiver.InitializeJoinedChannelsAsync();
         await receiver.JoinDiscussionChatsAsync();
         if (receiver.CommentingIsStarted)
         {
