@@ -17,7 +17,7 @@ public class AiModelsManager
     public AiModelsManager(AppSettings settings)
     {
         this.settings = settings;
-        http = new Http(settings.Value.ProxyForIONet);
+        http = settings.Value.ProxyForIONet.Enabled ? new Http(settings.Value.ProxyForIONet) : new Http();
         modelsByPriority = settings.Value.AiModels.OrderBy(e => e.Priority).ToList();
         CurrentModelId = modelsByPriority.First().Id;
     }

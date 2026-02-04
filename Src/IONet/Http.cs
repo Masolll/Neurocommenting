@@ -7,6 +7,11 @@ public class Http
 {
     public HttpClient Client { get; init; }
 
+    public Http()
+    {
+        Client = new HttpClient();
+    }
+
     public Http(Proxy proxy)
     {
         var webProxy = new WebProxy($"socks5://{proxy.Ip}:{proxy.Port}")

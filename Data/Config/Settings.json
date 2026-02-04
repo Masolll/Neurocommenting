@@ -14,6 +14,7 @@
 
   "IONetApiKey": "some_api_key",
   "ProxyForIONet": {
+    "Enabled": false,
     "Ip": "some_ip",
     "Port": 0,
     "Login": "some_login",

@@ -4,11 +4,12 @@ namespace Neurocommenting.Infrastructure;
 
 public class Proxy
 {
+    public bool Enabled { get; set; }
     public string Ip { get; set; }
     public int Port { get; set; }
     public string Login { get; set; }
     public string Password { get; set; }
-
+    
     public Proxy(string ip, int port, string login, string password)
     {
         Ip = ip;

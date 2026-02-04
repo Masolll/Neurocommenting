@@ -9,7 +9,9 @@ namespace Neurocommenting.Telegram;
 
 public class TelegramClientManager
 {
-    private List<TelegramClient> accounts;
+    public List<TelegramClient> Accounts = new();
+    public bool CommentingIsStarted;
+    
     private readonly AppSettings settings;
     private readonly AiModelsManager aiModelsManager;
 
@@ -19,9 +21,17 @@ public class TelegramClientManager
         this.aiModelsManager = aiModelManager;
     }
 
-    public async Task InitializeAccountsAsync()
+    public async Task InitializeAccountsIfNeededAsync()
     {
-        accounts = new List<TelegramClient>();
+        if (Accounts.Count == 0)
+        {
+            await InitializeAccountsAsync();
+        }
+    }
+
+    private async Task InitializeAccountsAsync()
+    {
+        Accounts = new List<TelegramClient>();
 
         var pathToAccounts = AppPaths.AccountsFolder;
         var groups = Directory.GetDirectories(pathToAccounts, "Group*");
@@ -33,7 +43,7 @@ public class TelegramClientManager
                 try
                 {
                     var client = await AccountSetup.LoginAccountAsync(accountPath);
-                    accounts.Add(new TelegramClient(client, settings, aiModelsManager));
+                    Accounts.Add(new TelegramClient(client, settings, aiModelsManager));
                 }
                 catch (Exception exception)
                 {
@@ -41,7 +51,7 @@ public class TelegramClientManager
                 }
             }
         }
-        if (accounts.Count == 0)
+        if (Accounts.Count == 0)
         {
             throw new Exception("Нет ни одного рабочего аккаунта! Дальнейшая работа скрипта невозможна.");
         }
@@ -51,7 +61,7 @@ public class TelegramClientManager
     public async Task InitializeJoinedChannelsAsync()
     {
         var initializeTasks = new List<Task>();
-        foreach (var currentAccount in accounts)
+        foreach (var currentAccount in Accounts)
         {
             initializeTasks.Add(currentAccount.InitializeJoinedChannelsAsync());
         }
@@ -63,7 +73,7 @@ public class TelegramClientManager
     {
         var joinTasks = new List<Task>();
         ChannelsRepository.OpenFile();
-        foreach (var currentAccount in accounts)
+        foreach (var currentAccount in Accounts)
         {
             joinTasks.Add(currentAccount.JoinDiscussionChatsAsync());
         }
@@ -74,31 +84,12 @@ public class TelegramClientManager
     
     public void RunReceivingUpdates()
     {
-        foreach (var account in accounts)
+        foreach (var account in Accounts)
         {
-            account.UpdateProvider = new UpdateHandler(account, settings);
+            CommentingIsStarted = true;
             account.Client.WithUpdateManager(account.UpdateProvider.ExecuteHandler);
             Printer.PrintSuccess($"Аккаунт с ID: {account.Client.UserId} готов получать обновления!");
         }
-    }
-
-    public void PrintAccountsInfo()
-    {
-        var totalCountMonitorChats = 0;
-        var totalCountComments = 0;
-        var stringInfo = new StringBuilder();
-        foreach (var account in accounts)
-        {
-            totalCountMonitorChats += account.ChannelsAndDiscussions.Count;
-            totalCountComments += account.CommentsCount;
-            stringInfo.AppendLine($"Аккаунт ID: {account.Client.UserId} {{");
-            stringInfo.AppendLine($"    Оставил комментариев: {account.CommentsCount}");
-            stringInfo.AppendLine($"    Отслеживает каналов: {account.ChannelsAndDiscussions.Count}");
-            stringInfo.AppendLine("}");
-        }
-        stringInfo.AppendLine($"Всего комментариев: {totalCountComments}");
-        stringInfo.AppendLine($"Всего каналов: {totalCountMonitorChats}");
-        Printer.Print(stringInfo.ToString(), ConsoleColor.Magenta);
     }
 }
 

@@ -10,7 +10,7 @@ public static class AccountSetup
     public static async Task<WTelegram.Client> LoginAccountAsync(string pathToAccount)
     {
         AccountConfig config;
-        var pathToAccountSettings = AppPaths.AccountSettingsFile(pathToAccount);
+        var pathToAccountSettings = AppPaths.AccountConfigFile(pathToAccount);
         using (FileStream fs = new FileStream(pathToAccountSettings, FileMode.OpenOrCreate))
         {
             try
@@ -71,7 +71,7 @@ public static class AccountSetup
         var pathToAccount = AppPaths.AccountFolder(groupName, userId);
         Directory.CreateDirectory(pathToAccount);
         
-        var pathToAccountSettings = AppPaths.AccountSettingsFile(pathToAccount);
+        var pathToAccountSettings = AppPaths.AccountConfigFile(pathToAccount);
         JsonNode accountSettings = new System.Text.Json.Nodes.JsonObject();
 
         Console.WriteLine("Создайте приложение на сайте https://my.telegram.org для получения api_id и api_has");

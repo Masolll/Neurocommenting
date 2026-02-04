@@ -13,7 +13,7 @@ public class TelegramClient
     
     public Dictionary<long, InputPeerChannel> ChannelsAndDiscussions { get; } = new Dictionary<long, InputPeerChannel>();
     public Dictionary<long, string> ChannelsUsernames { get; } = new Dictionary<long, string>();
-    public UpdateHandler UpdateProvider { get; set; }
+    public UpdateHandler UpdateProvider { get; init; }
     public int CommentsCount { get; set; }
     public int SkipPostsBeforeCommenting { get; set; }
 
@@ -25,6 +25,7 @@ public class TelegramClient
         Client = client;
         this.settings = settings;
         this.aiModelsManager = aiModelsManager;
+        UpdateProvider = new UpdateHandler(this, settings);
     }
 
     public async Task CheckCommentsLimitAsync()
@@ -104,8 +105,8 @@ public class TelegramClient
                 && linkedChannel is Channel mainChannel
                 && mainChannel.MainUsername != null)
                 {
-                    ChannelsAndDiscussions.Add(mainChannel.ID, inputPeerChannel);
-                    ChannelsUsernames.Add(mainChannel.ID, mainChannel.MainUsername);
+                    ChannelsAndDiscussions[mainChannel.ID]= inputPeerChannel;
+                    ChannelsUsernames[mainChannel.ID] = mainChannel.MainUsername;
                     Printer.PrintInfo($"Аккаунт с ID: {Client.UserId} зарегистрировал канал @{mainChannel.MainUsername}.");
                 }
             }

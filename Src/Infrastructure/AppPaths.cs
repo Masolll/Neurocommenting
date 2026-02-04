@@ -18,7 +18,7 @@ public static class AppPaths
         => Path.Combine(GroupFolder(groupName), $"Account({accountId})");
 
     // Files
-    public static string AccountSettingsFile(string pathToAccount) => Path.Combine(pathToAccount, "Settings.json");
+    public static string AccountConfigFile(string pathToAccount) => Path.Combine(pathToAccount, "Account.json");
     public static string AccountSessionFile(string pathToAccount) => Path.Combine(pathToAccount, "Account.session");
     public static string LogFile(DateTime date) => Path.Combine(LogsFolder, $"{date.ToString("d")}.txt");
     public static string ChannelsFile => Path.Combine(ConfigFolder, "Channels.txt" );
@@ -26,8 +26,13 @@ public static class AppPaths
     public static string AppSettingsFile => Path.Combine(ConfigFolder, "Settings.json");
     public static string GroupProxyFile(string groupName) => Path.Combine(GroupFolder(groupName), "Proxy.txt");
     public static string GroupProxyFile (Proxy proxy) => Path.Combine(GroupFolder(proxy), "Proxy.txt");
+    
+    static AppPaths()
+    {
+        EnsureDataFolderExists();
+    }
 
-    public static void EnsureDataExists()
+    private static void EnsureDataFolderExists()
     {
         Directory.CreateDirectory(DataFolder);
         Directory.CreateDirectory(LogsFolder);
